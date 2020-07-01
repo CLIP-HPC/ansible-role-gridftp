@@ -1,0 +1,40 @@
+---
+# tasks file for hephyvienna.gridftp
+- name: Install packages
+  yum:
+    name:
+      - yum-priorities
+      - globus-gridftp-server
+      - globus-gridftp-server-progs
+      - globus-proxy-utils
+    state: installed
+
+- include_tasks: lcmaps.yml
+
+- name: Create gridftp.d folder
+  file:
+    state: directory
+    path: /etc/gridftp.d
+
+- name: Create gridftp log folder
+  file:
+    state: directory
+    path: /var/log/gridftp
+
+- name: Template gridftp config
+  template:
+    src: grid.conf.j2
+    dest: /etc/gridftp.d/grid.conf
+  notify: Restart gridftp-server
+
+- name: Copy globus-gridftp-server sysconfig file
+  copy:
+    src: globus-gridftp-server
+    dest: /etc/sysconfig/globus-gridftp-server
+  notify: Restart gridftp-server
+
+- name: Make sure that globus-gridftp-server is enabled and running
+  service:
+    name: globus-gridftp-server
+    state: started
+    enabled: true

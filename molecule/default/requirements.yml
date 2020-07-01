@@ -1,0 +1,7 @@
+---
+# dependencies for test
+
+- src: https://github.com/CLIP-HPC/ansible-role-grid.git
+  name: hephyvienna.grid
+  scm: git
+  version: clip_fix

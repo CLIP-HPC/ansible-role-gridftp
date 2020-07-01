@@ -1,0 +1,7 @@
+---
+# handlers file for hephyvienna.gridftp
+
+- name: Restart gridftp-server
+  service:
+    name: globus-gridftp-server
+    state: restarted

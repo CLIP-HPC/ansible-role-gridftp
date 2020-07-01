@@ -1,0 +1,8 @@
+port_range {{ role_gridftp_port_start}},{{ role_gridftp_port_end }}
+{% if role_gridftp_datainterface | length > 0  %}
+data_interface {{ role_gridftp_datainterface }}
+{% endif %} 
+log_level ERROR,WARN,INFO
+log_single /var/log/gridftp/gridftp-auth.log
+log_transfer /var/log/gridftp/gridftp.log
+log_module stdio_ng
