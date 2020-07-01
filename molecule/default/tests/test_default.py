@@ -14,7 +14,7 @@ testinfra_hosts = testinfra.utils.ansible_runner.AnsibleRunner(
     '/etc/grid-security/ban-voms-mapfile',
     '/etc/grid-security/ban-mapfile',
     '/etc/grid-security/gsi-authz.conf',
-    '/etc/lcmaps.db'
+    '/etc/lcmaps/lcmaps.db'
 ])
 def test_files(host, name):
     f = host.file(name)

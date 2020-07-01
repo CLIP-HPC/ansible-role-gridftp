@@ -22,7 +22,7 @@
     - ban-mapfile
     - grid-mapfile
 
-- name: Make sure that gridmapdir is owned by condor
+- name: Make sure that gridmapdir exists
   file:
     recurse: true
     state: directory
@@ -31,7 +31,7 @@
 - name: Copy lcmaps.db file
   copy:
     src: lcmaps.db
-    dest: /etc/lcmaps.db
+    dest: /etc/lcmaps/lcmaps.db
 
 - name: Configure gsi-authz
   copy:
