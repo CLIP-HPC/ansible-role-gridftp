@@ -1,5 +1,13 @@
 ---
 # tasks file for hephyvienna.gridftp
+- name: Configure xrootd-dsi repo
+  yum_repository:
+    name: "XROOTD-DSI"
+    description: "XROOTD-DSI repository"
+    baseurl: "https://storage-ci.web.cern.ch/storage-ci/xrootd-dsi/tag/cc-7/x86_64/"
+    enabled: true
+    gpgcheck: false
+
 - name: Install packages
   yum:
     name:
@@ -7,6 +15,7 @@
       - globus-gridftp-server
       - globus-gridftp-server-progs
       - globus-proxy-utils
+      - xrootd-dsi
     state: installed
 
 - include_tasks: lcmaps.yml
@@ -24,17 +33,17 @@
 - name: Template gridftp config
   template:
     src: grid.conf.j2
-    dest: /etc/gridftp.d/grid.conf
+    dest: /etc/gridftp.conf
   notify: Restart gridftp-server
 
-- name: Copy globus-gridftp-server sysconfig file
-  copy:
-    src: globus-gridftp-server
-    dest: /etc/sysconfig/globus-gridftp-server
+- name: template xrootd-gridftp-server sysconfig file
+  template:
+    src: xrootd-gridftp-server.j2
+    dest: /etc/sysconfig/xrootd-gridftp-server
   notify: Restart gridftp-server
 
-- name: Make sure that globus-gridftp-server is enabled and running
+- name: Make sure that xrootd-gridftp is enabled and running
   service:
-    name: globus-gridftp-server
+    name: xrootd-gridftp
     state: started
     enabled: true

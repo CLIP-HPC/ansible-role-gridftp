@@ -1,7 +1,0 @@
-#http://gridpp-storage.blogspot.com/2019/10/modern-account-mapping-for-cephxrootd.html
-export LLGT_RUN_LCAS=no
-export LLGT_LIFT_PRIVILEGED_PROTECTION=1
-
-export LCMAPS_DEBUG_LEVEL=5
-# optional (uncomment the following line to output log messages to a file):
-export LCMAPS_LOG_FILE=/tmp/lcmaps.log

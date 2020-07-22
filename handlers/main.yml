@@ -3,5 +3,5 @@
 
 - name: Restart gridftp-server
   service:
-    name: globus-gridftp-server
+    name: xrootd-gridftp
     state: restarted
